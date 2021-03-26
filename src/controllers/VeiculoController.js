@@ -1,22 +1,43 @@
+const mongoose = require('mongoose');
+const Veiculo = require('../models/Veiculo');
+
 module.exports = {
     async index(req, res) {
-        return res.json("index");
+        try{
+            const veiculos = await Veiculo.find();
+            return res.json(veiculos);
+        } catch(error) {
+            return res.json(error);
+        }        
     },
 
     async show(req, res) {
-        return res.json("show");
+        const veiculo = await Veiculo.findById(req.params.id);
+        return res.json(veiculo);
     },
 
     async store(req, res) {
-        return res.json("store");
+        try {
+            const veiculo = await Veiculo.create(req.body);               
+            return res.status(201).json(veiculo);
+        } catch(error) {
+            return res.status(401).json(error);
+        }
+      
     },
 
     async update(req, res) {
-        return res.json("update");
+        try {
+            const veiculo = await Veiculo.findByIdAndUpdate(req.params.id, req.body, { new: true });
+            return res.status(200).json(veiculo);
+        } catch(error) {
+            return res.status(401).json(error);
+        }      
     },
 
     async destroy(req, res) {
-        return res.json("destroy");
+        await Veiculo.findByIdAndRemove(req.params.id);
+        return res.status(204).send();
     }
 }
     
