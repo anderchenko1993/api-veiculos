@@ -1,22 +1,18 @@
-const mongoose = require('mongoose');
 const Veiculo = require('../models/Veiculo');
+const yup = require('yup');
 
-module.exports = {
-    async index(req, res) {
-        try{
-            const veiculos = await Veiculo.find();
-            return res.json(veiculos);
-        } catch(error) {
-            return res.json(error);
-        }        
-    },
+class VeiculoController {
+    async index(req, res) {      
+        const veiculos = await Veiculo.find();
+        return res.json(veiculos);       
+    }
 
     async show(req, res) {
         const veiculo = await Veiculo.findById(req.params.id);
         return res.json(veiculo);
-    },
+    }
 
-    async store(req, res) {
+    async store(req, res) {        
         try {
             const veiculo = await Veiculo.create(req.body);               
             return res.status(201).json(veiculo);
@@ -24,7 +20,7 @@ module.exports = {
             return res.status(401).json(error);
         }
       
-    },
+    }
 
     async update(req, res) {
         try {
@@ -33,11 +29,13 @@ module.exports = {
         } catch(error) {
             return res.status(401).json(error);
         }      
-    },
+    }
 
     async destroy(req, res) {
         await Veiculo.findByIdAndRemove(req.params.id);
         return res.status(204).send();
     }
 }
+
+module.exports = new VeiculoController();
     

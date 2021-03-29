@@ -19,6 +19,6 @@ mongoose.connect('mongodb://localhost:27017/db_veiculos',
   }
 );
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
