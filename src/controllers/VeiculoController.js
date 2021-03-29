@@ -1,5 +1,4 @@
 const Veiculo = require('../models/Veiculo');
-const yup = require('yup');
 
 class VeiculoController {
     async index(req, res) {      
@@ -13,22 +12,13 @@ class VeiculoController {
     }
 
     async store(req, res) {        
-        try {
-            const veiculo = await Veiculo.create(req.body);               
-            return res.status(201).json(veiculo);
-        } catch(error) {
-            return res.status(401).json(error);
-        }
-      
+        const veiculo = await Veiculo.create(req.body);               
+        return res.status(201).json(veiculo);      
     }
 
     async update(req, res) {
-        try {
-            const veiculo = await Veiculo.findByIdAndUpdate(req.params.id, req.body, { new: true });
-            return res.status(200).json(veiculo);
-        } catch(error) {
-            return res.status(401).json(error);
-        }      
+        const veiculo = await Veiculo.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        return res.status(200).json(veiculo);
     }
 
     async destroy(req, res) {
