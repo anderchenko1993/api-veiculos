@@ -12,7 +12,7 @@ app.use(cors());
 app.use(routes);
 app.use(apiErrorHandler);
 
-mongoose.connect('mongodb://localhost:27017/db_veiculos', 
+mongoose.connect('mongodb+srv://mongo_user:2DW1YO03oXf4VCC1@cluster0.yfarq.mongodb.net/db_veiculos', 
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
