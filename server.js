@@ -3,6 +3,7 @@ const cors = require('cors');
 const routes = require('./src/routes');
 const mongoose = require('mongoose');
 const apiErrorHandler = require('./src/error/api-error-handler');
+const { database: db } = require('./config');
 
 const app = express();
 const port = 3000;
@@ -12,7 +13,7 @@ app.use(cors());
 app.use(routes);
 app.use(apiErrorHandler);
 
-mongoose.connect('mongodb+srv://mongo_user:2DW1YO03oXf4VCC1@cluster0.yfarq.mongodb.net/db_veiculos', 
+mongoose.connect(`mongodb+srv://mongo_user:${db.user}@${db.host}/${db.name}`, 
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
